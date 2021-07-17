@@ -19,15 +19,19 @@ public class jumpTest : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    { 
-        direction = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+    {
+        //방향키로 이동
+        direction = new Vector3(Input.GetAxis("Vertical"), 0, Input.GetAxis("Horizontal"));
         direction.Normalize();
 
         transform.Translate(direction * Time.deltaTime * speed);
+
+        //점프
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Jump();
         }
+        
     }
 
     void Jump()
@@ -39,11 +43,13 @@ public class jumpTest : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision) //충돌 감지 - 바닥에 닿았는지
+    private void OnCollisionEnter(Collision collision) 
     {
+        //충돌 감지 - 바닥에 닿았는지
         if (collision.gameObject.tag == "Ground")
         {
             isJumping = false;
         }
+        
     }
 }
