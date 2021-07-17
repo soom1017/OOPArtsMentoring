@@ -17,4 +17,19 @@ public class LeftRightPlatform : MonoBehaviour
     {
         transform.Translate(0, 0, distanceMax * Time.deltaTime * Mathf.Sin(Time.time * speed));
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.CompareTag("Player"))
+        {
+            collision.transform.SetParent(transform);
+        }
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.transform.CompareTag("Player"))
+        {
+            collision.transform.SetParent(null);
+        }
+    }
 }
